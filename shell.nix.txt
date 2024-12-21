@@ -1,0 +1,19 @@
+{ pkgs ? import <nixpkgs> {} }:
+
+pkgs.mkShell {
+  buildInputs = with pkgs; [
+    python3
+    python3Packages.numpy
+    python3Packages.pandas
+    python3Packages.matplotlib
+    python3Packages.scikit-learn
+    python3Packages.flask
+    python3Packages.requests
+  ];
+
+  shellHook = ''
+    echo "Python development environment loaded"
+    python --version
+  '';
+}
+
