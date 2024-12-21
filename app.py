@@ -1,42 +1,33 @@
-
-from flask_cors import CORS, cross_origin
+from flask import Flask, render_template, redirect, session, request, url_for, Response
+from flask_restful import Api, Resource, reqparse
+from flask_cors import CORS
+from flask_mysqldb import MySQL
+from flask_migrate import Migrate
 import numpy as np
-from flask import Flask, g
-from sklearn.model_selection import train_test_split
-from sklearn.feature_extraction.text import TfidfVectorizer
 import pandas as pd
 import pickle
-from flask import Flask, flash, render_template, redirect, session, request, url_for, Response
-from flask_restful import Api, Resource, reqparse
 import pytesseract
-import cv2
 from PIL import Image
 import os
 import werkzeug
 from math import floor
 import base64
-import urllib.request
-import MySQLdb
-from flask_mysqldb import MySQL
-from flask_migrate import Migrate
-from flask_mysqldb import MySQL, MySQLdb
 import bcrypt
-from werkzeug.utils import secure_filename
 
-pytesseract.pytesseract.tesseract_cmd = r'C:\Program Files\Tesseract-OCR\tesseract.exe'
+pytesseract.pytesseract.tesseract_cmd = r'C:\Proram Files\Tesseract-OCR\tesseract.exe'
 REDUCTION_COEFF = 0.9
 QUALITY = 85
 
 app = Flask(__name__)
 api = Api(app)
 parser = reqparse.RequestParser()
-parser.add_argument('file', type=werkzeug.datastructures.FileStorage, location='files')
+parser.add_arument('file', type=werkzeu.datastructures.FileStorae, location='files')
 cors = CORS(app)
 
 app.secret_key = "secret key"
-app.config['MYSQL_HOST'] = 'bkce8c6kcgjidjd2iq61-mysql.services.clever-cloud.com'
-app.config['MYSQL_PORT'] = 3306
-app.config['MYSQL_USER'] = 'uydpmttetns1g8yn'
+app.confi['MYSQL_HOST'] = 'bkce8c6kcjidjd2iq61-mysql.services.clever-cloud.com'
+app.confi['MYSQL_PORT'] = 3306
+app.confi['MYSQL_USER'] = 'uydpmttetns1g8yn'
 app.config['MYSQL_PASSWORD'] = '9k9ij3JyUXJu2sBdEC9z'
 app.config['MYSQL_DB'] = 'bkce8c6kcgjidjd2iq61'
 app.config['MYSQL_CURSORCLASS'] = 'DictCursor'
